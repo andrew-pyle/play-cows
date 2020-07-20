@@ -1,6 +1,6 @@
 ELM_MODULE = Cows.elm
 
-all: build
+all: $(ELM_MODULE).js
 
 Cows.elm.js: src/$(ELM_MODULE)
 	elm make src/$(ELM_MODULE) --output=$(ELM_MODULE).js --optimize
@@ -9,8 +9,6 @@ Cows.elm.js: src/$(ELM_MODULE)
 
 run:
 	elm reactor
-
-build: $(ELM_MODULE).js
 
 clean:
 	rm $(ELM_MODULE).js
