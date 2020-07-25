@@ -1,14 +1,18 @@
+# Production Dependencies  = elm
+# Development Dependencies = elm, elm-live
 ELM_MODULE = Cows.elm
 
-all: $(ELM_MODULE).js
+all: build
 
 Cows.elm.js: src/$(ELM_MODULE)
 	elm make src/$(ELM_MODULE) --output=$(ELM_MODULE).js --optimize
 
-.PHONY: build clean run
+.PHONY: build clean dev
 
-run:
-	elm reactor
+dev:
+	elm-live src/$(ELM_MODULE) --open -- --output=$(ELM_MODULE).js --debug
+
+build: $(ELM_MODULE).js
 
 clean:
 	rm $(ELM_MODULE).js
