@@ -229,6 +229,14 @@ theme =
     }
 
 
+appLayout : Style
+appLayout =
+    Css.batch
+        [ maxWidth (Css.em 30)
+        , margin2 (px 0) auto
+        ]
+
+
 appTypography : Style
 appTypography =
     Css.batch
@@ -429,7 +437,8 @@ view model =
     div
         [ class "app"
         , css
-            [ appTypography
+            [ appLayout
+            , appTypography
             ]
         ]
         [ Css.Global.global
