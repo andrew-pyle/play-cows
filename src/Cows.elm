@@ -263,6 +263,19 @@ emojiTypography =
         ]
 
 
+btnStyle : Style
+btnStyle =
+    Css.batch
+        [ padding2 (Css.em 0.5) (Css.em 1)
+        , margin (Css.em 0.1)
+        , backgroundColor theme.accent
+        , color (hex "FFFFFF")
+        , borderRadius (px 5)
+        , border3 (px 0) solid theme.primary
+        , flexGrow (int 1)
+        ]
+
+
 primaryColor : Style
 primaryColor =
     Css.batch
@@ -405,30 +418,35 @@ control =
         ]
 
 
+emojiControl : Style
+emojiControl =
+    Css.batch
+        [ fontSize (rem 1.5)
+        ]
+
+
 {-| Styled Components
 -}
 btn : List (Attribute msg) -> List (Html msg) -> Html msg
 btn =
     styled button
-        [ padding2 (Css.em 0.5) (Css.em 1)
-        , margin (Css.em 0.1)
-        , backgroundColor theme.accent
-        , color (hex "FFFFFF")
-        , borderRadius (px 5)
-        , border3 (px 0) solid theme.primary
-        , flexGrow (int 1)
+        [ btnStyle
         ]
 
 
 btnPrimary : List (Attribute msg) -> List (Html msg) -> Html msg
 btnPrimary =
     styled button
-        [ padding2 (Css.em 0.5) (Css.em 1)
-        , margin (Css.em 0.1)
+        [ btnStyle
         , backgroundColor theme.primary
-        , color (hex "FFFFFF")
-        , borderRadius (px 5)
-        , border3 (px 0) solid theme.primary
+        ]
+
+
+btnMuted : List (Attribute msg) -> List (Html msg) -> Html msg
+btnMuted =
+    styled button
+        [ btnStyle
+        , backgroundColor theme.muted
         ]
 
 
@@ -462,8 +480,8 @@ view model =
                     [ div [ css [ dashboardLabel ] ] [ span [ css [ emojiTypography ] ] [ text <| "🐮" ] ]
                     , div [ css [ dashboardValue ] ]
                         [ div [ css [ dashboardControls ] ]
-                            [ btn [ onClick <| AddResource Cow -10 ] [ text <| "–10" ]
-                            , btn [ onClick <| AddResource Cow -1 ] [ text <| "–1" ]
+                            [ btnPrimary [ onClick <| AddResource Cow -10 ] [ text <| "–10" ]
+                            , btnPrimary [ onClick <| AddResource Cow -1 ] [ text <| "–1" ]
                             ]
                         , div [ css [ dashboardQty ] ] [ span [] [ text <| String.fromInt model.cows ] ]
                         , div [ css [ dashboardControls ] ]
@@ -473,53 +491,11 @@ view model =
                         ]
                     ]
                 , div [ css [ dashboardResource ] ]
-                    [ div [ css [ dashboardLabel ] ] [ span [ css [ emojiTypography ] ] [ text <| "🌽" ] ]
-                    , div [ css [ dashboardValue ] ]
-                        [ div [ css [ dashboardControls ] ]
-                            [ btn [ onClick <| AddResource CornField -10 ] [ text <| "–10" ]
-                            , btn [ onClick <| AddResource CornField -1 ] [ text <| "–1" ]
-                            ]
-                        , div [ css [ dashboardQty ] ] [ span [] [ text <| String.fromInt model.cornFields ] ]
-                        , div [ css [ dashboardControls ] ]
-                            [ btn [ onClick <| AddResource CornField 1 ] [ text <| "+1" ]
-                            , btn [ onClick <| AddResource CornField 10 ] [ text <| "+10" ]
-                            ]
-                        ]
-                    ]
-                , div [ css [ dashboardResource ] ]
-                    [ div [ css [ dashboardLabel ] ] [ span [ css [ emojiTypography ] ] [ text <| "🌾" ] ]
-                    , div [ css [ dashboardValue ] ]
-                        [ div [ css [ dashboardControls ] ]
-                            [ btn [ onClick <| AddResource HayBail -10 ] [ text <| "–10" ]
-                            , btn [ onClick <| AddResource HayBail -1 ] [ text <| "–1" ]
-                            ]
-                        , div [ css [ dashboardQty ] ] [ span [] [ text <| String.fromInt model.hayBails ] ]
-                        , div [ css [ dashboardControls ] ]
-                            [ btn [ onClick <| AddResource HayBail 1 ] [ text <| "+1" ]
-                            , btn [ onClick <| AddResource HayBail 10 ] [ text <| "+10" ]
-                            ]
-                        ]
-                    ]
-                , div [ css [ dashboardResource ] ]
-                    [ div [ css [ dashboardLabel ] ] [ span [ css [ emojiTypography ] ] [ text <| "🚜" ] ]
-                    , div [ css [ dashboardValue ] ]
-                        [ div [ css [ dashboardControls ] ]
-                            [ btn [ onClick <| AddResource Tractor -10 ] [ text <| "–10" ]
-                            , btn [ onClick <| AddResource Tractor -1 ] [ text <| "–1" ]
-                            ]
-                        , div [ css [ dashboardQty ] ] [ span [] [ text <| String.fromInt model.tractors ] ]
-                        , div [ css [ dashboardControls ] ]
-                            [ btn [ onClick <| AddResource Tractor 1 ] [ text <| "+1" ]
-                            , btn [ onClick <| AddResource Tractor 10 ] [ text <| "+10" ]
-                            ]
-                        ]
-                    ]
-                , div [ css [ dashboardResource ] ]
                     [ div [ css [ dashboardLabel ] ] [ span [ css [ emojiTypography ] ] [ text <| "💰" ] ]
                     , div [ css [ dashboardValue ] ]
                         [ div [ css [ dashboardControls ] ]
-                            [ btn [ onClick <| AddResource Money -10 ] [ text <| "–10" ]
-                            , btn [ onClick <| AddResource Money -1 ] [ text <| "–1" ]
+                            [ btnPrimary [ onClick <| AddResource Money -10 ] [ text <| "–10" ]
+                            , btnPrimary [ onClick <| AddResource Money -1 ] [ text <| "–1" ]
                             ]
                         , div [ css [ dashboardQty ] ] [ span [] [ text <| "$" ++ String.fromInt model.money ] ]
                         , div [ css [ dashboardControls ] ]
@@ -528,29 +504,70 @@ view model =
                             ]
                         ]
                     ]
+                , div [ css [ dashboardResource ] ]
+                    [ div [ css [ dashboardLabel ] ] [ span [ css [ emojiTypography ] ] [ text <| "🌾" ] ]
+                    , div [ css [ dashboardValue ] ]
+                        [ div [ css [ dashboardControls ] ]
+                            [ btnPrimary [ onClick <| AddResource HayBail -1 ] [ text <| "–1" ]
+                            ]
+                        , div [ css [ dashboardQty ] ] [ span [] [ text <| String.fromInt model.hayBails ] ]
+                        , div [ css [ dashboardControls ] ]
+                            [ btn [ onClick <| AddResource HayBail 1 ] [ text <| "+1" ]
+                            ]
+                        ]
+                    ]
+                , div [ css [ dashboardResource ] ]
+                    [ div [ css [ dashboardLabel ] ] [ span [ css [ emojiTypography ] ] [ text <| "🌽" ] ]
+                    , div [ css [ dashboardValue ] ]
+                        [ div [ css [ dashboardControls ] ]
+                            [ btnPrimary [ onClick <| AddResource CornField -1 ] [ text <| "–1" ]
+                            ]
+                        , div [ css [ dashboardQty ] ] [ span [] [ text <| String.fromInt model.cornFields ] ]
+                        , div [ css [ dashboardControls ] ]
+                            [ btn [ onClick <| AddResource CornField 1 ] [ text <| "+1" ]
+                            ]
+                        ]
+                    ]
+                , div [ css [ dashboardResource ] ]
+                    [ div [ css [ dashboardLabel ] ] [ span [ css [ emojiTypography ] ] [ text <| "🚜" ] ]
+                    , div [ css [ dashboardValue ] ]
+                        [ div [ css [ dashboardControls ] ]
+                            [ btnPrimary [ onClick <| AddResource Tractor -1 ] [ text <| "–1" ]
+                            ]
+                        , div [ css [ dashboardQty ] ] [ span [] [ text <| String.fromInt model.tractors ] ]
+                        , div [ css [ dashboardControls ] ]
+                            [ btn [ onClick <| AddResource Tractor 1 ] [ text <| "+1" ]
+                            ]
+                        ]
+                    ]
                 ]
             , div
                 [ class "controls-zone", css [ controlsZone ] ]
                 [ div [ css [ control ] ]
-                    [ span [ css [ emojiTypography ] ] [ text <| "☠️" ]
-                    , btnPrimary [ onClick <| HerdStarves ] [ text <| (String.left 2 <| String.fromFloat <| (cowDeathRate model.level * 100)) ++ "%" ]
+                    [ span [ css [ emojiTypography, emojiControl ] ] [ text <| "☠️" ]
+                    , btnMuted [ onClick <| HerdStarves ] [ text <| (String.left 2 <| String.fromFloat <| (cowDeathRate model.level * 100)) ++ "%" ]
                     ]
                 , div [ css [ control ] ]
-                    [ span [ css [ emojiTypography ] ] [ text <| "🐄" ]
-                    , btnPrimary [ onClick <| BuyCows ] [ text <| String.fromInt (wholeCowsPlayerCanAfford model.money model.baseCowBuyPrice) ++ " cows" ]
+                    [ span [ css [ emojiTypography, emojiControl ] ] [ text <| "🐄→💵" ]
+                    , btnMuted [ onClick <| BuyCows ] [ text <| String.fromInt (wholeCowsPlayerCanAfford model.money model.baseCowBuyPrice) ++ " cows" ]
                     ]
                 , div [ css [ control ] ]
-                    [ span [ css [ emojiTypography ] ] [ text <| "💵" ]
-                    , btnPrimary [ onClick <| SellCows ] [ text <| "$" ++ String.fromInt (cowSellPrice model.level * model.cows) ]
+                    [ span [ css [ emojiTypography, emojiControl ] ] [ text <| "💵→🐄" ]
+                    , btnMuted [ onClick <| SellCows ] [ text <| "$" ++ String.fromInt (cowSellPrice model.level * model.cows) ]
                     ]
                 ]
             ]
         , div [ class "rules-zone", css [ color theme.muted ] ]
             [ h2 [ class "rules-heading" ] [ text <| "Rules" ]
             , ul []
-                [ li [] [ text <| "💵 = Sell your Herd." ]
-                , li [] [ text <| "☠️ = Herd Starves!" ]
-                , li [] [ text <| "🐄 = Buy a new Herd." ]
+                [ li [] [ text <| "🐮—Cow Herd." ]
+                , li [] [ text <| "💰—Money." ]
+                , li [] [ text <| "🌾—Hay Bales." ]
+                , li [] [ text <| "🌽—Corn Fields." ]
+                , li [] [ text <| "🚜—Tractors." ]
+                , li [] [ text <| "💵—Sell your Herd." ]
+                , li [] [ text <| "☠️—Herd Starves!" ]
+                , li [] [ text <| "🐄—Buy a new Herd." ]
                 , li [] [ text <| "Four tractors are automatically sold for $1" ]
                 , li [] [ text <| "Base Cow Buy/Sell Price is $10 per Cow" ]
                 , li [] [ text <| "Collect 10 cornfields to go up a level. Maximum level is " ++ String.fromInt maxLevel ++ "." ]
