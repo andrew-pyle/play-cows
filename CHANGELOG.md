@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.2.1] - 2020-08-08
+
+### Added
+
+- Prevent double-tap zoom on touch devices. Pressing the buttons too quickly was
+  causing zooming, not game actions.
+
 ## [0.2.0] - 2020-08-08
 
 ### Breaking

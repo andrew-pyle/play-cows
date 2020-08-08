@@ -460,7 +460,11 @@ view model =
             ]
         ]
         [ Css.Global.global
-            [ selector "body" [ margin (px 0), backgroundColor theme.secondary ]
+            [ selector "body"
+                [ margin (px 0)
+                , backgroundColor theme.secondary
+                , property "touch-action" "manipulation"
+                ]
             , selector "button"
                 [ fontFamily inherit
                 , fontSize inherit
