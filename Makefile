@@ -13,9 +13,9 @@ Cows.elm.js: src/$(ELM_MODULE)
 
 # Write version numbers via this Makefile
 service-worker.js:
-	sed -i '' 's|^const APP_VERSION =.*;|const APP_VERSION = "$(APP_VERSION)";|' service-worker.js
-	sed -i '' 's|^const APP_NAME =.*;|const APP_NAME = "$(APP_NAME)";|' service-worker.js
-	sed -i '' 's|^const ELM_MODULE =.*;|const ELM_MODULE = "$(ELM_MODULE).js";|' service-worker.js
+	sed -i 's|^const APP_VERSION =.*;|const APP_VERSION = "$(APP_VERSION)";|' service-worker.js
+	sed -i 's|^const APP_NAME =.*;|const APP_NAME = "$(APP_NAME)";|' service-worker.js
+	sed -i 's|^const ELM_MODULE =.*;|const ELM_MODULE = "$(ELM_MODULE).js";|' service-worker.js
 
 dev:
 	npx elm-live src/$(ELM_MODULE) --open -- --output=$(ELM_MODULE).js --debug

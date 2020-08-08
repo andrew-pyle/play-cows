@@ -1,6 +1,6 @@
 // Set via Makefile
 const APP_NAME = "Play-Cows";
-const APP_VERSION = "0.2.1";
+const APP_VERSION = "0.2.0";
 const ELM_MODULE = "Cows.elm.js";
 const CURRENT_CACHE_NAME = createCacheName(APP_NAME, APP_VERSION);
 
