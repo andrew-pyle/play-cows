@@ -3,26 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
     <title>Play Cows Game</title>
+    <link rel="manifest" href="site.webmanifest" />
     <!-- Thanks Lea Verou & CSS-Tricks.com https://css-tricks.com/emojis-as-favicons/ -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤠</text></svg>"
-    />
+    <link rel="icon" href="/img/cowboy-emoji.svg" />
+    <!-- Lighthouse recommended an icon with a background this for Apple -->
+    <link rel="apple-touch-icon" href="/img/cowboy-noto-emoji-maskable.png" />
     <script type="module">
       // Service Worker
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker
-          .register("service-worker.js")
+          .register("/service-worker.js")
           .then((sw) => console.log("⚙️ service worker registered"))
           .catch((err) =>
             console.error("⚙️ service worker failed to register")
           );
       }
     </script>
+    <style>
+      footer {
+        background: lightgrey;
+        padding: 2em;
+        font-size: 0.9rem;
+        color: #525252;
+      }
+    </style>
   </head>
   <body>
+    <noscript
+      >JavaScript is necessary to run this app, but this browser doesn't have
+      JavaScript enabled.</noscript
+    >
     <div id="root"></div>
+    <footer>
+      Cowboy Hat Face icons are from the
+      <a href="https://github.com/googlefonts/noto-emoji"
+        >googlefonts/noto-emoji</a
+      >
+      project under the
+      <a href="https://www.apache.org/licenses/LICENSE-2.0"
+        >Apache License 2.0</a
+      >. Backgrounds have been added to some of the icon files.
+    </footer>
+
     <script src="Cows.elm.js"></script>
     <script>
       var app = Elm.Cows.init({

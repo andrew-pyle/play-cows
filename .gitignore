@@ -2,3 +2,5 @@
 elm-stuff/
 *.elm.js
 
+# macOS
+.DS_Store

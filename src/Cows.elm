@@ -4,7 +4,7 @@ import Browser
 import Css exposing (..)
 import Css.Global exposing (selector)
 import Html.Styled exposing (..)
-import Html.Styled.Attributes exposing (class, css)
+import Html.Styled.Attributes exposing (class, css, href)
 import Html.Styled.Events exposing (onClick)
 import String exposing (left)
 
@@ -456,7 +456,6 @@ view model =
         [ class "app"
         , css
             [ appLayout
-            , appTypography
             ]
         ]
         [ Css.Global.global
@@ -464,6 +463,7 @@ view model =
                 [ margin (px 0)
                 , backgroundColor theme.secondary
                 , property "touch-action" "manipulation"
+                , appTypography
                 ]
             , selector "button"
                 [ fontFamily inherit
