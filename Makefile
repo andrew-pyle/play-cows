@@ -1,5 +1,5 @@
 APP_NAME = Play-Cows
-APP_VERSION = 0.2.1
+APP_VERSION = 0.2.2
 ELM_MODULE = Cows.elm
 
 all: build
